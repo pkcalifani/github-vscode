@@ -1,11 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>git e github</title>
+    <title>Curso de Treinamento</title>
 </head>
 <body>
-    <h1>ola git e github no vscode</h1>
+    <h1>Curso de Treinamento</h1>
+    <ul>
+        {% for video in videos %}
+            <li>
+                <iframe src="https://www.youtube.com/embed/{{ video[0] }}"></iframe>
+                {% if not video[1] %}
+                    <a href="{{ url_for('complete', video_id=video[0]) }}">Marcar como concluído</a>
+                {% else %}
+                    <span>Concluído</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    <div id="progress">Progresso: {{ videos | selectattr("1", "eq", 1) | list | length }} de {{ videos | length }}</div>
 </body>
 </html>
